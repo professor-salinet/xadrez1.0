@@ -38,37 +38,41 @@ var pecas = [];
 
 pecas[0] = new Peca(cor2, linhas[0], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_1", './torre_preta.png');
 pecas[1] = new Peca(cor2, linhas[0], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_2", './torre_preta.png');
-pecas[2] = new Peca(cor2, linhas[0], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_1", './torre_preta.png');
-pecas[3] = new Peca(cor2, linhas[0], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_2", './torre_preta.png');
-pecas[4] = new Peca(cor2, linhas[0], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_1", './torre_preta.png');
-pecas[5] = new Peca(cor2, linhas[0], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_2", './torre_preta.png');
-pecas[6] = new Peca(cor2, linhas[0], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rei_preto", './torre_preta.png');
-pecas[7] = new Peca(cor2, linhas[1], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rainha_preto", './torre_preta.png');
-pecas[8] = new Peca(cor2, linhas[1], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_1", './torre_preta.png');
-pecas[9] = new Peca(cor2, linhas[1], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_2", './torre_preta.png');
-pecas[10] = new Peca(cor2, linhas[1], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_3", './torre_preta.png');
-pecas[11] = new Peca(cor2, linhas[1], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_4", './torre_preta.png');
-pecas[12] = new Peca(cor2, linhas[1], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_5", './torre_preta.png');
-pecas[13] = new Peca(cor2, linhas[1], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_6", './torre_preta.png');
-pecas[14] = new Peca(cor2, linhas[1], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_7", './torre_preta.png');
-pecas[15] = new Peca(cor2, linhas[1], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_8", './torre_preta.png');
+pecas[2] = new Peca(cor2, linhas[0], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_1", './cavalo_preto.png');
+pecas[3] = new Peca(cor2, linhas[0], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_2", './cavalo_preto.png');
+pecas[4] = new Peca(cor2, linhas[0], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_1", './bispo_preto.png');
+pecas[5] = new Peca(cor2, linhas[0], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_2", './bispo_preto.png');
+pecas[6] = new Peca(cor2, linhas[0], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rei_preto", './rei_preto.png');
+pecas[7] = new Peca(cor2, linhas[0], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rainha_preto", './rainha_preta.png');
+pecas[8] = new Peca(cor2, linhas[1], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_1", './peao_preto.png');
+pecas[9] = new Peca(cor2, linhas[1], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_2", './peao_preto.png');
+pecas[10] = new Peca(cor2, linhas[1], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_3", './peao_preto.png');
+pecas[11] = new Peca(cor2, linhas[1], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_4", './peao_preto.png');
+pecas[12] = new Peca(cor2, linhas[1], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_5", './peao_preto.png');
+pecas[13] = new Peca(cor2, linhas[1], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_6", './peao_preto.png');
+pecas[14] = new Peca(cor2, linhas[1], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_7", './peao_preto.png');
+pecas[15] = new Peca(cor2, linhas[1], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_8", './peao_preto.png');
 
-pecas[16] = new Peca(cor1, linhas[7], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_1", './torre_preta.png');
-pecas[17] = new Peca(cor1, linhas[7], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_2", './torre_preta.png');
-pecas[18] = new Peca(cor1, linhas[7], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_1", './torre_preta.png');
-pecas[19] = new Peca(cor1, linhas[7], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_2", './torre_preta.png');
-pecas[20] = new Peca(cor1, linhas[7], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_1", './torre_preta.png');
-pecas[21] = new Peca(cor1, linhas[7], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_2", './torre_preta.png');
-pecas[22] = new Peca(cor1, linhas[7], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rei_branco", './torre_preta.png');
-pecas[23] = new Peca(cor1, linhas[7], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rainha_branco", './torre_preta.png');
-pecas[24] = new Peca(cor1, linhas[6], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_1", './torre_preta.png');
-pecas[25] = new Peca(cor1, linhas[6], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_2", './torre_preta.png');
-pecas[26] = new Peca(cor1, linhas[6], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_3", './torre_preta.png');
-pecas[27] = new Peca(cor1, linhas[6], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_4", './torre_preta.png');
-pecas[28] = new Peca(cor1, linhas[6], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_5", './torre_preta.png');
-pecas[29] = new Peca(cor1, linhas[6], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_6", './torre_preta.png');
-pecas[30] = new Peca(cor1, linhas[6], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_7", './torre_preta.png');
-pecas[31] = new Peca(cor1, linhas[6], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_8", './torre_preta.png');
+pecas[16] = new Peca(cor1, linhas[7], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_1", './torre_branca.png');
+pecas[17] = new Peca(cor1, linhas[7], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_2", './torre_branca.png');
+pecas[18] = new Peca(cor1, linhas[7], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_1", './cavalo_branco.png');
+pecas[19] = new Peca(cor1, linhas[7], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_2", './cavalo_branco.png');
+pecas[20] = new Peca(cor1, linhas[7], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_1", './bispo_branco.png');
+pecas[21] = new Peca(cor1, linhas[7], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_2", './bispo_branco.png');
+pecas[22] = new Peca(cor1, linhas[7], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rei_branco", './rei_branco.png');
+pecas[23] = new Peca(cor1, linhas[7], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rainha_branco", './rainha_branca.png');
+pecas[24] = new Peca(cor1, linhas[6], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_1", './peao_branco.png');
+pecas[25] = new Peca(cor1, linhas[6], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_2", './peao_branco.png');
+pecas[26] = new Peca(cor1, linhas[6], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_3", './peao_branco.png');
+pecas[27] = new Peca(cor1, linhas[6], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_4", './peao_branco.png');
+pecas[28] = new Peca(cor1, linhas[6], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_5", './peao_branco.png');
+pecas[29] = new Peca(cor1, linhas[6], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_6", './peao_branco.png');
+pecas[30] = new Peca(cor1, linhas[6], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_7", './peao_branco.png');
+pecas[31] = new Peca(cor1, linhas[6], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_8", './peao_branco.png');
+
+/**
+ * Desafio: criar todos os 64 "objetos" em uma estrutura de loop
+ */
 
 var celula = [];
 var numCelula = 0;
@@ -86,13 +90,11 @@ for (let l = 0; l < linhas.length; l++) {
         celula[numCelula] = new Tabuleiro(corAtual, posicaoSuperior, posicaoEsquerda, linhas[l], colunas[c], alturaCelulaPadrao, larguraCelulaPadrao, "celula_" + colunas[c] + "_" + linhas[l]);
         posicaoEsquerda += larguraCelulaPadrao;
 
-        // console.log("corAtual antes: ", corAtual);
         if (corAtual == cor1) {
             corAtual = cor2;
         } else {
             corAtual = cor1;
         }
-        // console.log("corAtual depois: ", corAtual);
 
         numCelula++;
     }
@@ -101,12 +103,8 @@ for (let l = 0; l < linhas.length; l++) {
 
 var divsCelulas = [];
 
-// console.log("celula[63].nome: ", celula[63].nome);
-
-console.log(pecas);
-
 for (let c = 0; c < celula.length; c++) {
-    divsCelulas[c] = document.createElement("div");
+    divsCelulas[c] = document.createElement("div"); // <div></div>
     divsCelulas[c].id = celula[c].nome;
     divsCelulas[c].style.backgroundColor = celula[c].cor;
     divsCelulas[c].style.position = "absolute";
@@ -125,11 +123,6 @@ for (let c = 0; c < celula.length; c++) {
     divsCelulas[c].style.alignItems = "center";
 
     for (let p = 0; p < pecas.length; p++) {
-        // console.log("celula[" + c + "].linha: ", celula[c].linha);
-        // console.log("pecas[" + p + "].linha: ", celula[c].linha);
-        // console.log("------------------------");
-        // console.log("celula[" + c + "].coluna: ", celula[c].coluna);
-        // console.log("pecas[" + p + "].coluna: ", celula[c].coluna);
         if (celula[c].linha == pecas[p].linha && celula[c].coluna == pecas[p].coluna) {
             let peca_tmp = document.createElement("img");
             peca_tmp.src = pecas[p].img;
@@ -137,17 +130,125 @@ for (let c = 0; c < celula.length; c++) {
             peca_tmp.height = pecas[p].altura;
             peca_tmp.style.marginLeft = "auto";
             peca_tmp.style.marginRight = "auto";
+            if (pecas[p].cor == cor1) {
+                // peca_tmp.style.backgroundColor = cor2;
+            } else {
+                // peca_tmp.style.backgroundColor = cor1;
+            }
             peca_tmp.id = pecas[p].nome;
             divsCelulas[c].appendChild(peca_tmp);
-            // console.log("achou");
-        } else {
-            // console.log("não achou");
         }
     }
 
     document.body.appendChild(divsCelulas[c]);
 }
 
-/**
- * Desafio: criar todos os 64 "objetos" conforme variável acima
- */
+class Movimento {
+    constructor (/** parâmetros */ peca, linhaOrigem, colunaOrigem, linhaDestino, colunaDestino, historico_movimentos) {
+        this.peca = peca;
+        this.linhaDestino = linhaDestino;
+        this.colunaDestino = colunaDestino;
+        this.linhaOrigem = linhaOrigem;
+        this.colunaOrigem = colunaOrigem;
+        this.historico_movimentos = historico_movimentos;
+    }
+
+    moverPeca () {
+        // ação ...
+        pecaMovimentada = [];
+        linhaOrigem = [];
+        colunaOrigem = [];
+        linhaDestino = [];
+        colunaDestino = [];
+    }
+}
+
+var movimento = new Movimento();
+
+class HistoricoMovimentos {
+    pecaMovimentada = [];
+    linhaOrigem = [];
+    colunaOrigem = [];
+    linhaDestino = [];
+    colunaDestino = [];
+
+    constructor (pecaMovimentada, linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) {
+        this.pecaMovimentada = pecaMovimentada;
+        this.linhaOrigem = linhaOrigem;
+        this.colunaOrigem = colunaOrigem;
+        this.linhaDestino = linhaDestino;
+        this.colunaDestino = colunaDestino;
+    }
+
+    registrarMovimento() {
+        pecaMovimentada.push(this.pecaMovimentada);
+        linhaOrigem.push(this.linhaOrigem);
+        colunaOrigem.push(this.colunaOrigem);
+        linhaDestino.push(this.linhaDestino);
+        colunaDestino.push(this.colunaDestino);
+    }
+}
+
+var historico_movimentos = new HistoricoMovimentos();
+
+(function() {
+    document.onmouseup = handleMouseUp;
+    function handleMouseUp(event) {
+        document.getElementById('pecaTemp').style.display = "none";
+        event = event || window.event; // IE-ism
+        if (event.target.tagName == "IMG" || event.target.tagName == "img") {
+            console.log("Ops! Não é possível realizar este movimento, pois a peça " + event.target.id + " já está ocupando a posição.");
+        } else {
+            console.log(event.target.id);
+        }
+        pecaClicada = null;
+    }
+
+    document.onmousedown = handleMouseDown;
+    function handleMouseDown(event) {
+        document.getElementById('pecaTemp').style.display = "block";
+        event = event || window.event; // IE-ism
+        if (event.target.tagName == "IMG" || event.target.tagName == "img") {
+            pecaClicada = event.target;
+        }
+    }
+
+    document.onmousemove = handleMouseMove;
+    function handleMouseMove(event) {
+        var eventDoc, 
+            doc, 
+            body,
+            pecaTemp = document.getElementById('pecaTemp');
+
+        event = event || window.event; // IE-ism
+
+        if (event.pageX == null && event.clientX != null) {
+            eventDoc = (event.target && event.target.ownerDocument) || document;
+            doc = eventDoc.documentElement;
+            body = eventDoc.body;
+
+            event.pageX = event.clientX +
+            (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+            (doc && doc.clientLeft || body && body.clientLeft || 0);
+            event.pageY = event.clientY +
+            (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+            (doc && doc.clientTop  || body && body.clientTop  || 0 );
+        }
+
+        pecaTemp.style.position = "absolute";
+        pecaTemp.style.left = event.pageX + medida;
+        pecaTemp.style.top = event.pageY + medida;
+        pecaTemp.style.zIndex = '999';
+        pecaTemp.innerHTML = '';
+        var imgPecaTemp = document.createElement('img');
+        if (event.target.tagName == "img" || event.target.tagName == "IMG") {
+            imgPecaTemp.src = './' + event.target.src.replace(/^.*[\\/]/, '');
+            imgPecaTemp.width = larguraPecaPadrao;
+            imgPecaTemp.height = alturaPecaPadrao;
+            pecaTemp.appendChild(imgPecaTemp);
+        }
+        return false;
+    }
+})();
+
+var pecaClicada;
