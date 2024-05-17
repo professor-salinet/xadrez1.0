@@ -108,15 +108,15 @@ var divsCelulas = [];
 
 for (let c = 0; c < celula.length; c++) {
     divsCelulas[c] = document.createElement("div"); // <div></div>
-    divsCelulas[c].id = celula[c].nome;
-    divsCelulas[c].style.backgroundColor = celula[c].cor;
-    divsCelulas[c].style.position = "absolute";
-    divsCelulas[c].style.top = celula[c].x + medida;
-    divsCelulas[c].style.left = celula[c].y + medida;
-    divsCelulas[c].style.height = celula[c].altura + medida;
-    divsCelulas[c].style.width = celula[c].largura + medida;
-    divsCelulas[c].dataset.line = celula[c].linha;
-    divsCelulas[c].dataset.column = celula[c].coluna;
+    divsCelulas[c].id = celula[c].nome; // <div id="..."></div>
+    divsCelulas[c].style.backgroundColor = celula[c].cor; // <div id="..." style="background-color: ...;"></div>
+    divsCelulas[c].style.position = "absolute"; // <div id="..." style="background-color: ...; position: absolute;"></div>
+    divsCelulas[c].style.top = celula[c].x + medida; // <div id="..." style="background-color: ...; position: absolute; top: ..px;"></div>
+    divsCelulas[c].style.left = celula[c].y + medida; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px;"></div>
+    divsCelulas[c].style.height = celula[c].altura + medida; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px; height: ..px;"></div>
+    divsCelulas[c].style.width = celula[c].largura + medida; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px; height: ..px; width: ..px;"></div>
+    divsCelulas[c].dataset.line = celula[c].linha; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px; height: ..px; width: ..px;" data-line=".."></div>
+    divsCelulas[c].dataset.column = celula[c].coluna; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px; height: ..px; width: ..px;" data-line=".." data-column=".."></div>
     // divsCelulas[c].innerText = celula[c].coluna + celula[c].linha;
     if (celula[c].cor == cor1) {
         divsCelulas[c].style.color = cor2;
@@ -129,14 +129,14 @@ for (let c = 0; c < celula.length; c++) {
 
     for (let p = 0; p < pecas.length; p++) {
         if (celula[c].linha == pecas[p].linha && celula[c].coluna == pecas[p].coluna) {
-            let peca_tmp = document.createElement("img");
-            peca_tmp.src = pecas[p].img;
-            peca_tmp.width = pecas[p].largura;
-            peca_tmp.height = pecas[p].altura;
-            peca_tmp.style.marginLeft = "auto";
-            peca_tmp.style.marginRight = "auto";
-            peca_tmp.dataset.indexNumber = pecas[p].posicaoVetor;
-            peca_tmp.id = pecas[p].nome;
+            let peca_tmp = document.createElement("img"); // <img />
+            peca_tmp.src = pecas[p].img; // <img src="..." />
+            peca_tmp.width = pecas[p].largura; // <img src="..." width="..." />
+            peca_tmp.height = pecas[p].altura; // <img src="..." width="..." height="..." />
+            peca_tmp.style.marginLeft = "auto"; // <img src="..." width="..." height="..." style="margin-left: auto;" />
+            peca_tmp.style.marginRight = "auto"; // <img src="..." width="..." height="..." style="margin-left: auto; margin-left: auto;" />
+            peca_tmp.dataset.indexNumber = pecas[p].posicaoVetor; // <img src="..." width="..." height="..." style="margin-left: auto; margin-left: auto;" data-index-number=".." />
+            peca_tmp.id = pecas[p].nome; // <img src="..." width="..." height="..." style="margin-left: auto; margin-left: auto;" data-index-number=".." id=".." />
             divsCelulas[c].appendChild(peca_tmp);
         }
     }
@@ -155,7 +155,8 @@ class Movimento {
     }
 
     moverPeca (peca, linhaOrigem, colunaOrigem, linhaDestino, colunaDestino, historico_movimentos) {
-        if (!this.impedirMovimento()) {
+        let pecaTemp = pecas[peca.dataset.indexNumber];
+        if (!this.impedirMovimento(pecaTemp)) {
             historico_movimentos.pecaMovimentada.push(peca);
             historico_movimentos.linhaOrigem.push(linhaOrigem);
             historico_movimentos.colunaOrigem.push(colunaOrigem);
@@ -164,20 +165,22 @@ class Movimento {
         }
     }
 
-    impedirMovimento(peca) {
-        let linhaTemp = linhas[parseInt(peca.linha) + 1];
-        let colunaTemp = colunas[colunas.indexOf(peca.coluna) + 1];
-        if (pecaTemp.tipo != "cavalo") {
-            if (this.quadranteDireitaLivre()) {
+    impedirMovimento(pecaTemp) {
+        let linhaTemp = linhas[parseInt(pecaTemp.linha) + 1];
+        let colunaTemp = colunas[colunas.indexOf(pecaTemp.coluna) + 1];
+        if (this.peca.tipo != "cavalo") {
+            if (this.quadranteDireitaLivre(pecaTemp)) {
 
             }
         }
         return true;
     }
 
-    quadranteDireitaLivre(peca) {
-        let linhaTemp = peca.
-        if (peca.dataset.indexNumber)
+    quadranteDireitaLivre(pecaTemp) {
+        let linhaTemp = pecas[pecaTemp.linha + 1];
+        if (linhaTemp != null) {
+            console.log("linha da direita existe.");
+        }
         return true;
     }
 }
@@ -209,20 +212,24 @@ var historico_movimentos = new HistoricoMovimentos();
             console.log(event.target.id);
             if (event.target.tagName == "DIV" || event.target.tagName == "div") {
                 if (event.target.innerHTML == "") {
-                    pecaMovimentada.push(pecaClicada);
-                    linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
-                    colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
-                    linhaDestino.push(event.target.dataset.line);
-                    colunaDestino.push(event.target.dataset.column);
-                    console.log("pecaMovimentada: ", pecaMovimentada);
-                    console.log("linhaOrigem: ", linhaOrigem);
-                    console.log("colunaOrigem: ", colunaOrigem);
-                    console.log("linhaDestino: ", linhaDestino);
-                    console.log("colunaDestino: ", colunaDestino);
+                    let pecaAnalisada = pecas[pecaClicada.dataset.indexNumber];
+                    if (pecaAnalisada.linha < event.target.dataset.line && pecaAnalisada.coluna == event.target.dataset.column && pecaAnalisada.tipo == "peao" && pecaAnalisada.cor == cor2) {
+                        pecaMovimentada.push(pecaClicada);
+                        linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
+                        colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
+                        linhaDestino.push(event.target.dataset.line);
+                        colunaDestino.push(event.target.dataset.column);
+                        console.log("pecaMovimentada: ", pecaMovimentada);
+                        console.log("linhaOrigem: ", linhaOrigem);
+                        console.log("colunaOrigem: ", colunaOrigem);
+                        console.log("linhaDestino: ", linhaDestino);
+                        console.log("colunaDestino: ", colunaDestino);
+    
+                        let pecaClicadaTemp = pecaClicada;
+                        pecaClicada.remove();
+                        event.target.appendChild(pecaClicadaTemp);
+                    }
 
-                    let pecaClicadaTemp = pecaClicada;
-                    pecaClicada.remove();
-                    event.target.appendChild(pecaClicadaTemp);
                 } else {
                     console.log("Ops! Não é possível realizar este movimento, pois o quadrante " + event.target.id + " já está ocupado.");
                 }
