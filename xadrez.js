@@ -74,7 +74,7 @@ pecas[30] = new Peca(cor1, linhas[6], colunas[6], alturaPecaPadrao, larguraPecaP
 pecas[31] = new Peca(cor1, linhas[6], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_8", './peao_branco.png', "peao", 31);
 
 /**
- * Desafio: criar todos os 64 "objetos" em uma estrutura de loop
+ * Desafio concluído: criar todos os 64 "objetos" em uma estrutura de loop
  */
 
 var celula = [];
@@ -212,13 +212,25 @@ var historico_movimentos = new HistoricoMovimentos();
             console.log(event.target.id);
             if (event.target.tagName == "DIV" || event.target.tagName == "div") {
                 if (event.target.innerHTML == "") {
+                    /**
+                     * as linhas de código abaixo analisam o movimento dos peões pretos e autorizam o mesmo
+                     */
                     let pecaAnalisada = pecas[pecaClicada.dataset.indexNumber];
+                    let movimentoPermitido = false;
                     if (pecaAnalisada.linha < event.target.dataset.line && pecaAnalisada.coluna == event.target.dataset.column && pecaAnalisada.tipo == "peao" && pecaAnalisada.cor == cor2) {
                         pecaMovimentada.push(pecaClicada);
                         linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
                         colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
                         linhaDestino.push(event.target.dataset.line);
                         colunaDestino.push(event.target.dataset.column);
+                        pecaAnalisada.linha = event.target.dataset.line;
+                        movimentoPermitido = true;
+                    }
+
+                    /**
+                     * A estrutura de validação abaixo verifica se o movimento está autorizado e executa as linhas de código do bloco if{}
+                     */
+                    if (movimentoPermitido == true) {
                         console.log("pecaMovimentada: ", pecaMovimentada);
                         console.log("linhaOrigem: ", linhaOrigem);
                         console.log("colunaOrigem: ", colunaOrigem);
@@ -228,6 +240,8 @@ var historico_movimentos = new HistoricoMovimentos();
                         let pecaClicadaTemp = pecaClicada;
                         pecaClicada.remove();
                         event.target.appendChild(pecaClicadaTemp);
+                    } else {
+                        console.log("Movimento não permitido.");
                     }
 
                 } else {
