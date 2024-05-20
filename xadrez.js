@@ -1,44 +1,61 @@
-class Tabuleiro {
-    constructor (cor, x, y, linha, coluna, altura, largura, nome, posicaoVetor) {
-        this.cor = cor;
-        this.x = x;
-        this.y = y;
-        this.linha = linha;
-        this.coluna = coluna;
-        this.altura = altura;
-        this.largura = largura;
-        this.nome = nome;
-        this.posicaoVetor = posicaoVetor;
+/**
+ * As linhas abaixo são as declarações das variáveis do ambiente
+ */
+
+const pecaTemp = document.getElementById('pecaTemp'); // variável atribuída para uso do elemento <div id="pecaTemp">
+const cor1 = "#fff"; // cor branca para uso no tabuleiro
+const cor2 = "#000"; // cor preta para uso no tabuleiro
+const medida = "px"; // variável para uso de unidade de medida em pixel para uso nos valores dos stributos css/style
+const larguraCelulaPadrao = 100; // variável utilizada para definir o tamanho da largura padrão da célula/quadrante padrão do tabuleiro
+const alturaCelulaPadrao = 100; // variável utilizada para definir o tamanho da altura padrão da célula/quadrante padrão do tabuleiro
+const larguraPecaPadrao = 50; // variável utilizada para definir o tamanho da largura padrão das peças
+const alturaPecaPadrao = 50; // variável utilizada para definir o tamanho da altura padrão das peças
+const linhas = ["1","2","3","4","5","6","7","8"]; // variável do tipo matriz para definir a quantidade e nomes das linhas do tabuleiro
+const colunas = ["a","b","c","d","e","f","g","h"]; // variável do tipo matriz para definir a quantidade e nomes das colunas do tabuleiro
+var pecas = []; // variável do tipo matriz que vai atribuir os objetos das peças
+var celula = []; // variável do tipo matriz que vai atribuir os objetos das células/quadrantes
+var numCelula = 0; // variável que vai contabilizar a quantidade de células dos quadrantes (linhas * colunas)
+var corAtual = cor1; // variável que vai definir a cor atual da repetição entre linhas e colunas
+var posicaoSuperior = 0; // variável que vai definir a posição superior inicial das células/quadrantes do tabuleiro, para uso na estrutura de repetição (for) das linhas e colunas
+var divsCelulas = []; // variável do tipo matriz que vai atribuir os elementos <div> das células/quadrantes
+var pecaClicada;
+var pecaMovimentada = [];
+var linhaOrigem = [];
+var colunaOrigem = [];
+var linhaDestino = [];
+var colunaDestino = [];
+
+class Tabuleiro { // declaração do objeto Tabuleiro
+    constructor (cor, x, y, linha, coluna, altura, largura, nome, posicaoVetor) { // declaração do construtor do objeto Tabuleiro e parâmetros
+        this.cor = cor; // definição da variável cor do objeto Tabuleiro
+        this.x = x; // definição da variável x do objeto Tabuleiro
+        this.y = y; // definição da variável y do objeto Tabuleiro
+        this.linha = linha; // definição da variável linha do objeto Tabuleiro
+        this.coluna = coluna; // definição da variável coluna do objeto Tabuleiro
+        this.altura = altura; // definição da variável altura do objeto Tabuleiro
+        this.largura = largura; // definição da variável largura do objeto Tabuleiro
+        this.nome = nome; // definição da variável nome do objeto Tabuleiro
+        this.posicaoVetor = posicaoVetor; // definição da variável posicaoVetor do objeto Tabuleiro
     }
 }
 
-class Peca {
-    constructor (cor, linha, coluna, altura, largura, nome, img, tipo, posicaoVetor) {
-        this.cor = cor;
-        this.linha = linha;
-        this.coluna = coluna;
-        this.altura = altura;
-        this.largura = largura;
-        this.nome = nome;
-        this.img = img;
-        this.tipo = tipo;
-        this.posicaoVetor = posicaoVetor;
+class Peca { // declaração do objeto Peca
+    constructor (cor, linha, coluna, altura, largura, nome, img, tipo, posicaoVetor) { // declaração do construtor do objeto Peca e parâmetros
+        this.cor = cor; // definição da variável cor do objeto Peca
+        this.linha = linha; // definição da variável linha do objeto Peca
+        this.coluna = coluna; // definição da variável coluna do objeto Peca
+        this.altura = altura; // definição da variável altura do objeto Peca
+        this.largura = largura; // definição da variável largura do objeto Peca
+        this.nome = nome; // definição da variável nome do objeto Peca
+        this.img = img; // definição da variável img do objeto Peca
+        this.tipo = tipo; // definição da variável tipo do objeto Peca
+        this.posicaoVetor = posicaoVetor; // definição da variável posicaoVetor do objeto Peca
     }
 }
 
-const cor1 = "#fff"; // branco
-const cor2 = "#000"; // preto
-const medida = "px"; // unidade de medida em pixel
-const larguraCelulaPadrao = 100;
-const alturaCelulaPadrao = 100;
-const larguraPecaPadrao = 50;
-const alturaPecaPadrao = 50;
-const linhas = ["1","2","3","4","5","6","7","8"];
-const colunas = ["a","b","c","d","e","f","g","h"];
-const totalCelulas = linhas.length * colunas.length;
-
-var pecas = [];
-
+/**
+ * As variáveis abaixo servirão para declarar os vetores da variável "pecas", os quais são proveniente da criação do objeto Peca
+ */
 pecas[0] = new Peca(cor2, linhas[0], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_1", './torre_preta.png', "torre", 0);
 pecas[1] = new Peca(cor2, linhas[0], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_2", './torre_preta.png', "torre", 1);
 pecas[2] = new Peca(cor2, linhas[0], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_1", './cavalo_preto.png', "cavalo", 2);
@@ -77,36 +94,31 @@ pecas[31] = new Peca(cor1, linhas[6], colunas[7], alturaPecaPadrao, larguraPecaP
  * Desafio concluído: criar todos os 64 "objetos" em uma estrutura de loop
  */
 
-var celula = [];
-var numCelula = 0;
-var corAtual = cor1;
-var posicaoSuperior = 0;
+for (let l = 0; l < linhas.length; l++) { // estrutura de repetição que vai repetir todas as linhas da variável "linhas" 
+    let posicaoEsquerda = 0; // variável que vai definir a posição inicial da esquerda das células/quadrantes do tabuleiro, a cada repetição de linha
 
-for (let l = 0; l < linhas.length; l++) {
-    let posicaoEsquerda = 0;
-    if (corAtual == cor1) {
-        corAtual = cor2;
-    } else {
-        corAtual = cor1;
-    }
-    for (let c = 0; c < colunas.length; c++) {
-        celula[numCelula] = new Tabuleiro(corAtual, posicaoSuperior, posicaoEsquerda, linhas[l], colunas[c], alturaCelulaPadrao, larguraCelulaPadrao, "celula_" + colunas[c] + "_" + linhas[l], l);
-        posicaoEsquerda += larguraCelulaPadrao;
+    if (corAtual == cor1) { // estrutura de validação que vai validar se a cor atual é a cor 1 e executar a linha de código abaixo, caso seja verdadeira a validação
+        corAtual = cor2; // variável corAtual receberá o valor da outra variável cor 2, ou seja, vai trocar de cor
+    } else { // bloco de código a ser executado caso a validação seja falsa
+        corAtual = cor1; // variável corAtual receberá o valor da outra variável cor 1, ou seja, vai trocar de cor
+    } // fechamento do if (bloco de códigos da estrutura de validação)
 
-        if (corAtual == cor1) {
-            corAtual = cor2;
-        } else {
-            corAtual = cor1;
-        }
+    for (let c = 0; c < colunas.length; c++) { // estrutura de repetição que vai repetir todas as colunas da variável "colunas"
+        celula[numCelula] = new Tabuleiro(corAtual, posicaoSuperior, posicaoEsquerda, linhas[l], colunas[c], alturaCelulaPadrao, larguraCelulaPadrao, "celula_" + colunas[c] + "_" + linhas[l], l); // declaração dos vetores da variável "celula", os quais são proveniente da criação do objeto Tabuleiro
+        posicaoEsquerda += larguraCelulaPadrao; // variável posicaoEsquerda será atribuído o valor dela mesmo + a largura de célula padrão, para alinhar horizontalmente as células/quadrantes do tabuleiro
 
-        numCelula++;
-    }
-    posicaoSuperior += alturaCelulaPadrao;
-}
+        if (corAtual == cor1) { // estrutura de validação que vai validar se a cor atual é a cor 1 e executar a linha de código abaixo, caso seja verdadeira a validação
+            corAtual = cor2; // variável corAtual receberá o valor da outra variável cor 2, ou seja, vai trocar de cor
+        } else { // bloco de código a ser executado caso a validação seja falsa
+            corAtual = cor1; // variável corAtual receberá o valor da outra variável cor 1, ou seja, vai trocar de cor
+        } // fechamento do if (bloco de códigos da estrutura de validação)
 
-var divsCelulas = [];
+        numCelula++; // a variável numCelula receberá o valor dela mesmo + 1
+    } // fechamento do for (bloco de códigos da estrutura de repetição)
+    posicaoSuperior += alturaCelulaPadrao; // variável posicaoSuperior será atribuído o valor dela mesmo + a altura de célula padrão, para alinhar verticalmente as células/quadrantes do tabuleiro
+} // fechamento do for (bloco de códigos da estrutura de repetição)
 
-for (let c = 0; c < celula.length; c++) {
+for (let c = 0; c < celula.length; c++) { // estrutura de repetição que vai repetir todos os vetores da variável/matriz "celula"
     divsCelulas[c] = document.createElement("div"); // <div></div>
     divsCelulas[c].id = celula[c].nome; // <div id="..."></div>
     divsCelulas[c].style.backgroundColor = celula[c].cor; // <div id="..." style="background-color: ...;"></div>
@@ -118,17 +130,18 @@ for (let c = 0; c < celula.length; c++) {
     divsCelulas[c].dataset.line = celula[c].linha; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px; height: ..px; width: ..px;" data-line=".."></div>
     divsCelulas[c].dataset.column = celula[c].coluna; // <div id="..." style="background-color: ...; position: absolute; top: ..px; left: ..px; height: ..px; width: ..px;" data-line=".." data-column=".."></div>
     // divsCelulas[c].innerText = celula[c].coluna + celula[c].linha;
-    if (celula[c].cor == cor1) {
-        divsCelulas[c].style.color = cor2;
-    } else {
-        divsCelulas[c].style.color = cor1;
-    }
-    divsCelulas[c].style.display = "grid";
-    // divsCelulas[c].style.textAlign = "center";
-    divsCelulas[c].style.alignItems = "center";
+    if (celula[c].cor == cor1) { // estrutura de validação que vai validar se a cor atual é a cor 1 e executar a linha de código abaixo, caso seja verdadeira a validação
+        divsCelulas[c].style.color = cor2; // o atributo css divsCelulas[c].style.color receberá o valor da outra variável cor 2, ou seja, vai trocar de cor
+    } else { // bloco de código a ser executado caso a validação seja falsa
+        divsCelulas[c].style.color = cor1; // o atributo css divsCelulas[c].style.color receberá o valor da outra variável cor 1, ou seja, vai trocar de cor
+    } // fechamento do if (bloco de códigos da estrutura de validação)
 
-    for (let p = 0; p < pecas.length; p++) {
-        if (celula[c].linha == pecas[p].linha && celula[c].coluna == pecas[p].coluna) {
+    divsCelulas[c].style.display = "grid"; // o atributo css divsCelulas[c].style.display receberá o valor "grid", para melhor uso do alinhamento de itens dentro da <div>
+    // divsCelulas[c].style.textAlign = "center";
+    divsCelulas[c].style.alignItems = "center"; // o atributo css divsCelulas[c].style.alignItems receberá o valor "center", para alinhar verticalmente ao centro os elementos que estiverem dentro da <div>
+
+    for (let p = 0; p < pecas.length; p++) { // estrutura de repetição que vai repetir todos os vetores da variável/matriz pecas
+        if (celula[c].linha == pecas[p].linha && celula[c].coluna == pecas[p].coluna) { // estrutura de validação que vai validar se a linha e coluna do vetor/objeto Tabuleiro é igual à linha e coluna do vetor/objeto Peca
             let peca_tmp = document.createElement("img"); // <img />
             peca_tmp.src = pecas[p].img; // <img src="..." />
             peca_tmp.width = pecas[p].largura; // <img src="..." width="..." />
@@ -137,12 +150,12 @@ for (let c = 0; c < celula.length; c++) {
             peca_tmp.style.marginRight = "auto"; // <img src="..." width="..." height="..." style="margin-left: auto; margin-left: auto;" />
             peca_tmp.dataset.indexNumber = pecas[p].posicaoVetor; // <img src="..." width="..." height="..." style="margin-left: auto; margin-left: auto;" data-index-number=".." />
             peca_tmp.id = pecas[p].nome; // <img src="..." width="..." height="..." style="margin-left: auto; margin-left: auto;" data-index-number=".." id=".." />
-            divsCelulas[c].appendChild(peca_tmp);
-        }
-    }
+            divsCelulas[c].appendChild(peca_tmp); // vetor variável/matriz <div> que receberá a peça/<img/> temporária 
+        } // fechamento do if (bloco de códigos da estrutura de validação)
+    } // fechamento do for (bloc de códigos da estrutura de repetição)
 
-    document.body.appendChild(divsCelulas[c]);
-}
+    document.body.appendChild(divsCelulas[c]); // o elemento <body> receberá a célula/quadrante/<div> da variável/matriz divsCelulas
+} // fechamento do for (bloco de códigos da estrutura de repetição)
 
 class Movimento {
     constructor (/** parâmetros */ peca, linhaOrigem, colunaOrigem, linhaDestino, colunaDestino, historico_movimentos) {
@@ -199,14 +212,13 @@ class HistoricoMovimentos {
 
 var historico_movimentos = new HistoricoMovimentos();
 
-(function() {
+(function() { // execução em tempo real das linhas de código do bloco de função inominada
     document.onmouseup = handleMouseUp;
     function handleMouseUp(event) {
-        let pecaTemp = document.getElementById('pecaTemp');
         pecaTemp.innerHTML = '';
         pecaTemp.style.display = "none";
         event = event || window.event; // IE-ism
-        if (event.target.tagName == "IMG" || event.target.tagName == "img") {
+        if (pecaClicada.tagName == "IMG" || pecaClicada.tagName == "img") {
             console.log("Ops! Não é possível realizar este movimento, pois a peça " + event.target.id + " já está ocupando a posição.");
         } else {
             console.log(event.target.id);
@@ -215,16 +227,18 @@ var historico_movimentos = new HistoricoMovimentos();
                     /**
                      * as linhas de código abaixo analisam o movimento dos peões pretos e autorizam o mesmo
                      */
-                    let pecaAnalisada = pecas[pecaClicada.dataset.indexNumber];
-                    let movimentoPermitido = false;
-                    if (pecaAnalisada.linha < event.target.dataset.line && pecaAnalisada.coluna == event.target.dataset.column && pecaAnalisada.tipo == "peao" && pecaAnalisada.cor == cor2) {
-                        pecaMovimentada.push(pecaClicada);
-                        linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
-                        colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
-                        linhaDestino.push(event.target.dataset.line);
-                        colunaDestino.push(event.target.dataset.column);
-                        pecaAnalisada.linha = event.target.dataset.line;
-                        movimentoPermitido = true;
+                    if (!pecaClicada.dataset.indexNumber) {
+                        let pecaAnalisada = pecas[pecaClicada.dataset.indexNumber];
+                        let movimentoPermitido = false;
+                        if (pecaAnalisada.linha < event.target.dataset.line && pecaAnalisada.coluna == event.target.dataset.column && pecaAnalisada.tipo == "peao" && pecaAnalisada.cor == cor2) {
+                            pecaMovimentada.push(pecaClicada);
+                            linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
+                            colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
+                            linhaDestino.push(event.target.dataset.line);
+                            colunaDestino.push(event.target.dataset.column);
+                            pecaAnalisada.linha = event.target.dataset.line;
+                            movimentoPermitido = true;
+                        }
                     }
 
                     /**
@@ -255,9 +269,9 @@ var historico_movimentos = new HistoricoMovimentos();
     document.onmousedown = handleMouseDown;
     function handleMouseDown(event) {
         event = event || window.event; // IE-ism
-        if (event.target.tagName == "IMG" || event.target.tagName == "img") {
-            document.getElementById('pecaTemp').style.display = "block";
-            pecaClicada = event.target;
+        pecaClicada = event.target;
+        if (pecaClicada.tagName == "IMG" || pecaClicada.tagName == "img") {
+            pecaTemp.style.display = "block";
             let imgPecaTemp = document.createElement('img');
             if (pecaClicada.tagName == "img" || pecaClicada.tagName == "IMG") {
                 if (pecaClicada != null) {
@@ -275,8 +289,7 @@ var historico_movimentos = new HistoricoMovimentos();
     function handleMouseMove(event) {
         var eventDoc, 
             doc, 
-            body,
-            pecaTemp = document.getElementById('pecaTemp');
+            body;
 
         event = event || window.event; // IE-ism
 
@@ -298,10 +311,3 @@ var historico_movimentos = new HistoricoMovimentos();
         return false;
     }
 })();
-
-var pecaClicada;
-var pecaMovimentada = [];
-var linhaOrigem = [];
-var colunaOrigem = [];
-var linhaDestino = [];
-var colunaDestino = [];
