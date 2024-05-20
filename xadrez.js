@@ -193,7 +193,7 @@ class Movimento {
     quadranteDireitaLivre(pecaTemp) {
         let linhaTemp = pecas[pecaTemp.linha + 1];
         if (linhaTemp != null) {
-            console.log("linha da direita existe.");
+            console.error("linha da direita existe.");
         }
         return true;
     }
@@ -218,18 +218,18 @@ var historico_movimentos = new HistoricoMovimentos();
     function handleMouseUp(event) {
         pecaTemp.innerHTML = '';
         pecaTemp.style.display = "none";
-        let elementoDestino = event.target;
         event = event || window.event; // IE-ism
+        let elementoDestino = event.target;
         if (elementoDestino.tagName == "IMG" || elementoDestino.tagName == "img") {
-            console.log("Ops! Não é possível realizar este movimento, pois a peça " + elementoDestino.id + " já está ocupando a posição.");
+            console.error("Ops! Não é possível realizar este movimento, pois a peça " + elementoDestino.id + " já está ocupando a posição.");
         } else {
-            console.log(elementoDestino.id);
+            // console.log(elementoDestino.id);
             if (elementoDestino.tagName == "DIV" || elementoDestino.tagName == "div") {
                 if (elementoDestino.innerHTML == "") {
                     /**
                      * As linhas de código abaixo analisam o movimento das peças e autorizam as mesmas
                      */
-                    let movimentoPermitido = false;
+                    let movimentoPermitido = false; // todos os movimentos estão bloqueados
                     let pecaAnalisada;
                     let nVetorPeca = pecaClicada.dataset.indexNumber;
                     if (nVetorPeca) {
@@ -262,9 +262,33 @@ var historico_movimentos = new HistoricoMovimentos();
                         if (
                             pecaAnalisada.linha == elementoDestino.dataset.line && // elementoDestino.dataset.line é uma string e precisa ser convertida para tipo numérico, caso precise ser utilizada como número
                             pecaAnalisada.coluna != elementoDestino.dataset.column && 
-                            pecaAnalisada.tipo == "torre" && pecaAnalisada.cor == cor2
+                            pecaAnalisada.tipo == "torre"
                         ) {
-                            if ()
+                            // console.log("elementoDestino.dataset.column: ", elementoDestino.dataset.column);
+                            // console.log("colunas.indexOf(elementoDestino.dataset.column): ", colunas.indexOf(elementoDestino.dataset.column));
+                            // console.log("colunas.indexOf(pecaAnalisada.coluna): ", colunas.indexOf(pecaAnalisada.coluna));
+                            let quadrantesLateraisLivres = [];
+                            let colunasLivres = true;
+                            if (colunas.indexOf(elementoDestino.dataset.column) > colunas.indexOf(pecaAnalisada.coluna)) {
+                                for (let cc = colunas.indexOf(pecaAnalisada.coluna) + 1; cc <= colunas.indexOf(elementoDestino.dataset.column); cc++) {
+                                    let celulaTemp = document.getElementById("celula_" + colunas[cc] + "_" + pecaAnalisada.linha);
+                                    if (celulaTemp.innerHTML != "") {
+                                        // console.log(celulaTemp);
+                                        colunasLivres = false;
+                                    }
+                                }
+                            }
+                            for (let c = 0; c < colunas.length; c++) {
+                                let quadranteTemp = document.getElementById("celula_" + colunas[c] + "_" + pecaAnalisada.linha);
+                                if (quadranteTemp.innerHTML == "" && colunas[c] != pecaAnalisada.linha) {
+                                    quadrantesLateraisLivres.push(colunas[c]);
+                                    pecaAnalisada.coluna = colunas[c];
+                                    if (colunasLivres == true) {
+                                        movimentoPermitido = true;
+                                    }
+                                }
+                            }
+                            // console.log("quadrantesLateraisLivres: ", quadrantesLateraisLivres);
                         }
                     }
 
@@ -278,23 +302,24 @@ var historico_movimentos = new HistoricoMovimentos();
                         linhaDestino.push(elementoDestino.dataset.line);
                         colunaDestino.push(elementoDestino.dataset.column);
                         pecaAnalisada.linha = elementoDestino.dataset.line;
+                        pecaAnalisada.coluna = elementoDestino.dataset.column;
                         pecaAnalisada.nMovimento++;
 
-                        console.log("pecaMovimentada: ", pecaMovimentada);
-                        console.log("linhaOrigem: ", linhaOrigem);
-                        console.log("colunaOrigem: ", colunaOrigem);
-                        console.log("linhaDestino: ", linhaDestino);
-                        console.log("colunaDestino: ", colunaDestino);
+                        // console.log("pecaMovimentada: ", pecaMovimentada);
+                        // console.log("linhaOrigem: ", linhaOrigem);
+                        // console.log("colunaOrigem: ", colunaOrigem);
+                        // console.log("linhaDestino: ", linhaDestino);
+                        // console.log("colunaDestino: ", colunaDestino);
     
                         let pecaClicadaTemp = pecaClicada;
                         pecaClicada.remove();
                         elementoDestino.appendChild(pecaClicadaTemp);
                     } else {
-                        console.log("Movimento não permitido.");
+                        console.error("Movimento não permitido.");
                     }
 
                 } else {
-                    console.log("Ops! Não é possível realizar este movimento, pois o quadrante " + elementoDestino.id + " já está ocupado.");
+                    console.error("Ops! Não é possível realizar este movimento, pois o quadrante " + elementoDestino.id + " já está ocupado.");
                 }
             }
         }
@@ -317,7 +342,7 @@ var historico_movimentos = new HistoricoMovimentos();
                 pecaTemp.appendChild(imgPecaTemp);
             }
         }
-        console.log(pecaClicada.id);
+        // console.log(pecaClicada.id);
     }
 
     document.onmousemove = handleMouseMove;
