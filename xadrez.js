@@ -40,7 +40,7 @@ class Tabuleiro { // declaração do objeto Tabuleiro
 }
 
 class Peca { // declaração do objeto Peca
-    constructor (cor, linha, coluna, altura, largura, nome, img, tipo, posicaoVetor) { // declaração do construtor do objeto Peca e parâmetros
+    constructor (cor, linha, coluna, altura, largura, nome, img, tipo, posicaoVetor, nMovimento) { // declaração do construtor do objeto Peca e parâmetros
         this.cor = cor; // definição da variável cor do objeto Peca
         this.linha = linha; // definição da variável linha do objeto Peca
         this.coluna = coluna; // definição da variável coluna do objeto Peca
@@ -50,45 +50,46 @@ class Peca { // declaração do objeto Peca
         this.img = img; // definição da variável img do objeto Peca
         this.tipo = tipo; // definição da variável tipo do objeto Peca
         this.posicaoVetor = posicaoVetor; // definição da variável posicaoVetor do objeto Peca
+        this.nMovimento = nMovimento; // definição da variável nMovimento do objeto Peca
     }
 }
 
 /**
  * As variáveis abaixo servirão para declarar os vetores da variável "pecas", os quais são proveniente da criação do objeto Peca
  */
-pecas[0] = new Peca(cor2, linhas[0], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_1", './torre_preta.png', "torre", 0);
-pecas[1] = new Peca(cor2, linhas[0], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_2", './torre_preta.png', "torre", 1);
-pecas[2] = new Peca(cor2, linhas[0], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_1", './cavalo_preto.png', "cavalo", 2);
-pecas[3] = new Peca(cor2, linhas[0], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_2", './cavalo_preto.png', "cavalo", 3);
-pecas[4] = new Peca(cor2, linhas[0], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_1", './bispo_preto.png', "bispo", 4);
-pecas[5] = new Peca(cor2, linhas[0], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_2", './bispo_preto.png', "bispo", 5);
-pecas[6] = new Peca(cor2, linhas[0], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rei_preto", './rei_preto.png', "rei", 6);
-pecas[7] = new Peca(cor2, linhas[0], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rainha_preto", './rainha_preta.png', "rainha", 7);
-pecas[8] = new Peca(cor2, linhas[1], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_1", './peao_preto.png', "peao", 8);
-pecas[9] = new Peca(cor2, linhas[1], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_2", './peao_preto.png', "peao", 9);
-pecas[10] = new Peca(cor2, linhas[1], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_3", './peao_preto.png', "peao", 10);
-pecas[11] = new Peca(cor2, linhas[1], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_4", './peao_preto.png', "peao", 11);
-pecas[12] = new Peca(cor2, linhas[1], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_5", './peao_preto.png', "peao", 12);
-pecas[13] = new Peca(cor2, linhas[1], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_6", './peao_preto.png', "peao", 13);
-pecas[14] = new Peca(cor2, linhas[1], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_7", './peao_preto.png', "peao", 14);
-pecas[15] = new Peca(cor2, linhas[1], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_8", './peao_preto.png', "peao", 15);
+pecas[0] = new Peca(cor2, linhas[0], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_1", './torre_preta.png', "torre", 0, 0);
+pecas[1] = new Peca(cor2, linhas[0], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_preto_2", './torre_preta.png', "torre", 1, 0);
+pecas[2] = new Peca(cor2, linhas[0], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_1", './cavalo_preto.png', "cavalo", 2, 0);
+pecas[3] = new Peca(cor2, linhas[0], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_preto_2", './cavalo_preto.png', "cavalo", 3, 0);
+pecas[4] = new Peca(cor2, linhas[0], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_1", './bispo_preto.png', "bispo", 4, 0);
+pecas[5] = new Peca(cor2, linhas[0], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_preto_2", './bispo_preto.png', "bispo", 5, 0);
+pecas[6] = new Peca(cor2, linhas[0], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rei_preto", './rei_preto.png', "rei", 6, 0);
+pecas[7] = new Peca(cor2, linhas[0], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rainha_preto", './rainha_preta.png', "rainha", 7, 0);
+pecas[8] = new Peca(cor2, linhas[1], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_1", './peao_preto.png', "peao", 8, 0);
+pecas[9] = new Peca(cor2, linhas[1], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_2", './peao_preto.png', "peao", 9, 0);
+pecas[10] = new Peca(cor2, linhas[1], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_3", './peao_preto.png', "peao", 10, 0);
+pecas[11] = new Peca(cor2, linhas[1], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_4", './peao_preto.png', "peao", 11, 0);
+pecas[12] = new Peca(cor2, linhas[1], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_5", './peao_preto.png', "peao", 12, 0);
+pecas[13] = new Peca(cor2, linhas[1], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_6", './peao_preto.png', "peao", 13, 0);
+pecas[14] = new Peca(cor2, linhas[1], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_7", './peao_preto.png', "peao", 14, 0);
+pecas[15] = new Peca(cor2, linhas[1], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_preto_8", './peao_preto.png', "peao", 15, 0);
 
-pecas[16] = new Peca(cor1, linhas[7], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_1", './torre_branca.png', "torre", 16);
-pecas[17] = new Peca(cor1, linhas[7], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_2", './torre_branca.png', "torre", 17);
-pecas[18] = new Peca(cor1, linhas[7], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_1", './cavalo_branco.png', "cavalo", 18);
-pecas[19] = new Peca(cor1, linhas[7], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_2", './cavalo_branco.png', "cavalo", 19);
-pecas[20] = new Peca(cor1, linhas[7], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_1", './bispo_branco.png', "bispo", 20);
-pecas[21] = new Peca(cor1, linhas[7], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_2", './bispo_branco.png', "bispo", 21);
-pecas[22] = new Peca(cor1, linhas[7], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rei_branco", './rei_branco.png', "rei", 22);
-pecas[23] = new Peca(cor1, linhas[7], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rainha_branco", './rainha_branca.png', "rei", 23);
-pecas[24] = new Peca(cor1, linhas[6], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_1", './peao_branco.png', "peao", 24);
-pecas[25] = new Peca(cor1, linhas[6], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_2", './peao_branco.png', "peao", 25);
-pecas[26] = new Peca(cor1, linhas[6], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_3", './peao_branco.png', "peao", 26);
-pecas[27] = new Peca(cor1, linhas[6], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_4", './peao_branco.png', "peao", 27);
-pecas[28] = new Peca(cor1, linhas[6], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_5", './peao_branco.png', "peao", 28);
-pecas[29] = new Peca(cor1, linhas[6], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_6", './peao_branco.png', "peao", 29);
-pecas[30] = new Peca(cor1, linhas[6], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_7", './peao_branco.png', "peao", 30);
-pecas[31] = new Peca(cor1, linhas[6], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_8", './peao_branco.png', "peao", 31);
+pecas[16] = new Peca(cor1, linhas[7], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_1", './torre_branca.png', "torre", 16, 0);
+pecas[17] = new Peca(cor1, linhas[7], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "torre_branco_2", './torre_branca.png', "torre", 17, 0);
+pecas[18] = new Peca(cor1, linhas[7], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_1", './cavalo_branco.png', "cavalo", 18, 0);
+pecas[19] = new Peca(cor1, linhas[7], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "cavalo_branco_2", './cavalo_branco.png', "cavalo", 19, 0);
+pecas[20] = new Peca(cor1, linhas[7], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_1", './bispo_branco.png', "bispo", 20, 0);
+pecas[21] = new Peca(cor1, linhas[7], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "bispo_branco_2", './bispo_branco.png', "bispo", 21, 0);
+pecas[22] = new Peca(cor1, linhas[7], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "rei_branco", './rei_branco.png', "rei", 22, 0);
+pecas[23] = new Peca(cor1, linhas[7], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "rainha_branco", './rainha_branca.png', "rei", 23, 0);
+pecas[24] = new Peca(cor1, linhas[6], colunas[0], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_1", './peao_branco.png', "peao", 24, 0);
+pecas[25] = new Peca(cor1, linhas[6], colunas[1], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_2", './peao_branco.png', "peao", 25, 0);
+pecas[26] = new Peca(cor1, linhas[6], colunas[2], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_3", './peao_branco.png', "peao", 26, 0);
+pecas[27] = new Peca(cor1, linhas[6], colunas[3], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_4", './peao_branco.png', "peao", 27, 0);
+pecas[28] = new Peca(cor1, linhas[6], colunas[4], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_5", './peao_branco.png', "peao", 28, 0);
+pecas[29] = new Peca(cor1, linhas[6], colunas[5], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_6", './peao_branco.png', "peao", 29, 0);
+pecas[30] = new Peca(cor1, linhas[6], colunas[6], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_7", './peao_branco.png', "peao", 30, 0);
+pecas[31] = new Peca(cor1, linhas[6], colunas[7], alturaPecaPadrao, larguraPecaPadrao, "peao_branco_8", './peao_branco.png', "peao", 31, 0);
 
 /**
  * Desafio concluído: criar todos os 64 "objetos" em uma estrutura de loop
@@ -217,27 +218,53 @@ var historico_movimentos = new HistoricoMovimentos();
     function handleMouseUp(event) {
         pecaTemp.innerHTML = '';
         pecaTemp.style.display = "none";
+        let elementoDestino = event.target;
         event = event || window.event; // IE-ism
-        if (pecaClicada.tagName == "IMG" || pecaClicada.tagName == "img") {
-            console.log("Ops! Não é possível realizar este movimento, pois a peça " + event.target.id + " já está ocupando a posição.");
+        if (elementoDestino.tagName == "IMG" || elementoDestino.tagName == "img") {
+            console.log("Ops! Não é possível realizar este movimento, pois a peça " + elementoDestino.id + " já está ocupando a posição.");
         } else {
-            console.log(event.target.id);
-            if (event.target.tagName == "DIV" || event.target.tagName == "div") {
-                if (event.target.innerHTML == "") {
+            console.log(elementoDestino.id);
+            if (elementoDestino.tagName == "DIV" || elementoDestino.tagName == "div") {
+                if (elementoDestino.innerHTML == "") {
                     /**
-                     * as linhas de código abaixo analisam o movimento dos peões pretos e autorizam o mesmo
+                     * As linhas de código abaixo analisam o movimento das peças e autorizam as mesmas
                      */
-                    if (!pecaClicada.dataset.indexNumber) {
-                        let pecaAnalisada = pecas[pecaClicada.dataset.indexNumber];
-                        let movimentoPermitido = false;
-                        if (pecaAnalisada.linha < event.target.dataset.line && pecaAnalisada.coluna == event.target.dataset.column && pecaAnalisada.tipo == "peao" && pecaAnalisada.cor == cor2) {
-                            pecaMovimentada.push(pecaClicada);
-                            linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
-                            colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
-                            linhaDestino.push(event.target.dataset.line);
-                            colunaDestino.push(event.target.dataset.column);
-                            pecaAnalisada.linha = event.target.dataset.line;
-                            movimentoPermitido = true;
+                    let movimentoPermitido = false;
+                    let pecaAnalisada;
+                    let nVetorPeca = pecaClicada.dataset.indexNumber;
+                    if (nVetorPeca) {
+                        pecaAnalisada = pecas[nVetorPeca];
+
+                        /**
+                         * As linhas de código abaixo analisam o movimento dos peões pretos e autorizam os movimentos dos mesmos
+                         */
+                        if (
+                            pecaAnalisada.linha < elementoDestino.dataset.line && 
+                            pecaAnalisada.coluna == elementoDestino.dataset.column && 
+                            pecaAnalisada.tipo == "peao" && pecaAnalisada.cor == cor2
+                        ) {
+                            if (
+                                pecaAnalisada.nMovimento == 0 && 
+                                elementoDestino.dataset.line <= (parseInt(pecaAnalisada.linha) + 2)
+                            ) {
+                                movimentoPermitido = true;
+                            } else if (
+                                pecaAnalisada.nMovimento > 0 && 
+                                elementoDestino.dataset.line == (parseInt(pecaAnalisada.linha) + 1)
+                            ) {
+                                movimentoPermitido = true;
+                            }
+                        }
+
+                        /**
+                         * As linhas de código abaixo analisam o movimento das torres pretas e autorizam os movimentos das mesmas
+                         */
+                        if (
+                            pecaAnalisada.linha == elementoDestino.dataset.line && // elementoDestino.dataset.line é uma string e precisa ser convertida para tipo numérico, caso precise ser utilizada como número
+                            pecaAnalisada.coluna != elementoDestino.dataset.column && 
+                            pecaAnalisada.tipo == "torre" && pecaAnalisada.cor == cor2
+                        ) {
+                            if ()
                         }
                     }
 
@@ -245,6 +272,14 @@ var historico_movimentos = new HistoricoMovimentos();
                      * A estrutura de validação abaixo verifica se o movimento está autorizado e executa as linhas de código do bloco if{}
                      */
                     if (movimentoPermitido == true) {
+                        pecaMovimentada.push(pecaClicada);
+                        linhaOrigem.push(pecas[pecaClicada.dataset.indexNumber].linha);
+                        colunaOrigem.push(pecas[pecaClicada.dataset.indexNumber].coluna);
+                        linhaDestino.push(elementoDestino.dataset.line);
+                        colunaDestino.push(elementoDestino.dataset.column);
+                        pecaAnalisada.linha = elementoDestino.dataset.line;
+                        pecaAnalisada.nMovimento++;
+
                         console.log("pecaMovimentada: ", pecaMovimentada);
                         console.log("linhaOrigem: ", linhaOrigem);
                         console.log("colunaOrigem: ", colunaOrigem);
@@ -253,13 +288,13 @@ var historico_movimentos = new HistoricoMovimentos();
     
                         let pecaClicadaTemp = pecaClicada;
                         pecaClicada.remove();
-                        event.target.appendChild(pecaClicadaTemp);
+                        elementoDestino.appendChild(pecaClicadaTemp);
                     } else {
                         console.log("Movimento não permitido.");
                     }
 
                 } else {
-                    console.log("Ops! Não é possível realizar este movimento, pois o quadrante " + event.target.id + " já está ocupado.");
+                    console.log("Ops! Não é possível realizar este movimento, pois o quadrante " + elementoDestino.id + " já está ocupado.");
                 }
             }
         }
