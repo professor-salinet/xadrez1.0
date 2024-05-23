@@ -146,6 +146,7 @@ for (let c = 0; c < celula.length; c++) { // estrutura de repetição que vai re
     divsCelulas[c].style.backgroundImage = "url(" + dirQuadrantes + celula[c].coluna + celula[c].linha + ".png)"; // o atributo css divsCelulas[c].style.backgroundImage receberá o valor "url(...)", para adicionar uma imagem de fundo da <div>
     divsCelulas[c].style.backgroundSize = "20% 20%";
     divsCelulas[c].style.backgroundRepeat = "no-repeat";
+    divsCelulas[c].style.backgroundPosition = "center";
 
     for (let p = 0; p < pecas.length; p++) { // estrutura de repetição que vai repetir todos os vetores da variável/matriz pecas
         if (celula[c].linha == pecas[p].linha && celula[c].coluna == pecas[p].coluna) { // estrutura de validação que vai validar se a linha e coluna do vetor/objeto Tabuleiro é igual à linha e coluna do vetor/objeto Peca
@@ -224,6 +225,7 @@ var historico_movimentos = new HistoricoMovimentos();
     function handleMouseDown(event) {
         event = event || window.event; // IE-ism
         pecaClicada = event.target;
+        pecaClicada.style.display = "none";
         if (pecaClicada.tagName == "IMG" || pecaClicada.tagName == "img") {
             pecaTemp.style.display = "block";
             let imgPecaTemp = document.createElement('img');
@@ -263,6 +265,7 @@ var historico_movimentos = new HistoricoMovimentos();
 
     document.onmouseup = handleMouseUp;
     function handleMouseUp(event) {
+        pecaClicada.style.display = "block";
         pecaTemp.innerHTML = '';
         pecaTemp.style.display = "none";
         event = event || window.event; // IE-ism
