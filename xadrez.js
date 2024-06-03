@@ -242,6 +242,7 @@ function moverTorre(pecaAnalisada, elementoDestino) {
         /**
          * As linhas de código abaixo analisam o movimento das torres pretas e autorizam os movimentos das mesmas
          */
+        let permitirMovimento = false;
         if (
             pecaAnalisada.linha == elementoDestino.dataset.line && // elementoDestino.dataset.line é uma string e precisa ser convertida para tipo numérico, caso precise ser utilizada como número
             pecaAnalisada.coluna != elementoDestino.dataset.column && 
@@ -311,6 +312,31 @@ function moverCavalo(pecaAnalisada, elementoDestino) {
         permitirMovimento = true;
     } else if ( // valida o movimento do cavalo dois quadrantes para direita e um quadrante para cima
         numVetorColunaQuadrante == (numVetorColunaPeca + 2) &&
+        numVetorLinhaQuadrante == (numVetorLinhaPeca - 1)
+    ) {
+        permitirMovimento = true;
+    } else if ( // valida o movimento do cavalo dois quadrantes para direita e um quadrante para baixo
+        numVetorColunaQuadrante == (numVetorColunaPeca + 2) &&
+        numVetorLinhaQuadrante == (numVetorLinhaPeca + 1)
+    ) {
+        permitirMovimento = true;
+    } else if ( // valida o movimento do cavalo dois quadrantes para baixo e um quadrante para direita
+        numVetorColunaQuadrante == (numVetorColunaPeca + 1) &&
+        numVetorLinhaQuadrante == (numVetorLinhaPeca + 2)
+    ) {
+        permitirMovimento = true;
+    } else if ( // valida o movimento do cavalo dois quadrantes para baixo e um quadrante para esquerda
+        numVetorColunaQuadrante == (numVetorColunaPeca - 1) &&
+        numVetorLinhaQuadrante == (numVetorLinhaPeca + 2)
+    ) {
+        permitirMovimento = true;
+    } else if ( // valida o movimento do cavalo dois quadrantes para esquerda e um quadrante para baixo
+        numVetorColunaQuadrante == (numVetorColunaPeca - 2) &&
+        numVetorLinhaQuadrante == (numVetorLinhaPeca + 1)
+    ) {
+        permitirMovimento = true;
+    } else if ( // valida o movimento do cavalo dois quadrantes para esquerda e um quadrante para cima
+        numVetorColunaQuadrante == (numVetorColunaPeca - 2) &&
         numVetorLinhaQuadrante == (numVetorLinhaPeca - 1)
     ) {
         permitirMovimento = true;
