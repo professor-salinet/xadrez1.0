@@ -299,17 +299,17 @@ function moverCavalo(pecaAnalisada, elementoDestino) {
     console.log("numVetorColunaQuadrante: ", numVetorColunaQuadrante);
     console.log("numVetorLinhaQuadrante: ", numVetorLinhaQuadrante);
     let permitirMovimento = false;
-    if (
+    if ( // valida o movimento do cavalo dois quadrantes para cima e um quadrante para esquerda
         numVetorColunaQuadrante == (numVetorColunaPeca - 1) &&
         numVetorLinhaQuadrante == (numVetorLinhaPeca - 2)
     ) {
         permitirMovimento = true;
-    } else if (
+    } else if ( // valida o movimento do cavalo dois quadrantes para cima e um quadrante para direita
         numVetorColunaQuadrante == (numVetorColunaPeca + 1) &&
         numVetorLinhaQuadrante == (numVetorLinhaPeca - 2)
     ) {
         permitirMovimento = true;
-    } else if (
+    } else if ( // valida o movimento do cavalo dois quadrantes para direita e um quadrante para cima
         numVetorColunaQuadrante == (numVetorColunaPeca + 2) &&
         numVetorLinhaQuadrante == (numVetorLinhaPeca - 1)
     ) {
