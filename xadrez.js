@@ -146,7 +146,7 @@ try {
     console.error("Eita! Aconteceu alguma coisa que não deu certo finalizar as linhas de código para a criação dos quadrantes. Veja o erro: ", e);
 }
 
-    try {
+try {
     for (let c = 0; c < celula.length; c++) { // estrutura de repetição que vai repetir todos os vetores da variável/matriz "celula"
         divsCelulas[c] = document.createElement("div"); // <div></div>
         divsCelulas[c].id = celula[c].nome; // <div id="..."></div>
@@ -228,6 +228,14 @@ pecasVencidasBrancas.style.padding = "10px 10px 10px 10px";
 pecasVencidasBrancas.style.display = "flex";
 pecasVencidasBrancas.style.flexWrap = "wrap";
 document.body.appendChild(pecasVencidasBrancas);
+
+function inverterCor() {
+    if (corPermitida == cor1) {
+        corPermitida = cor2;
+    } else {
+        corPermitida = cor1;
+    }
+}
 
 function moverPeao(pecaAnalisada, elementoDestino) {
     try {
@@ -403,16 +411,22 @@ function moverPeca(pecaAnalisada, pecaClicada, elementoDestino) {
 
         let pecaClicadaTemp = pecaClicada;
         pecaClicada.remove();
+        elementoDestino.innerHTML = "";
         elementoDestino.appendChild(pecaClicadaTemp);
-        if (corPermitida == cor1) {
-            corPermitida = cor2;
-        } else {
-            corPermitida = cor1;
-        }
+        inverterCor();
     } else {
         console.error("É... parece que não é sua vez ainda. Guenta aí...");
     }
 }
+
+function vencerPeao(pecaAnalisada, pecaClicada) {
+    let permitirMovimento = false;
+    if (pecaAnalisada.coluna != pecaClicada.coluna) {
+        permitirMovimento = true;
+    }
+    return permitirMovimento;
+}
+
 (function() { // execução em tempo real das linhas de código do bloco de função inominada
     document.onmousedown = handleMouseDown;
     function handleMouseDown(event) {
@@ -470,13 +484,16 @@ function moverPeca(pecaAnalisada, pecaClicada, elementoDestino) {
     function handleMouseUp(event) {
         try {
             pecaClicada.style.display = "grid";
+            // console.log(pecaClicada);
             pecaTemp.innerHTML = '';
             pecaTemp.style.display = "none";
             event = event || window.event; // IE-ism
             let elementoDestino = event.target;
+            let quadranteDestino = event.target;
+            if (elementoDestino.tagName == "IMG" || elementoDestino.tagName == "img") {
+                quadranteDestino = event.target.parentElement;
+            }
             let movimentoPermitido = false; // todos os movimentos estão bloqueados
-            let continuarJogada = false;
-
             /**
              * As linhas de código abaixo analisam o movimento das peças e autorizam as mesmas
              */
@@ -487,53 +504,53 @@ function moverPeca(pecaAnalisada, pecaClicada, elementoDestino) {
                 continuarJogada = true;
             }
 
-            if (elementoDestino.tagName == "IMG" || elementoDestino.tagName == "img") {
-                if (corPermitida != pecas[elementoDestino.dataset.indexNumber].cor) {
-                    if (corPermitida == cor1) {
-                        pecasVencidasBrancas.innerHTML += elementoDestino.parentElement.innerHTML;
-                    } else {
-                        pecasVencidasPretas.innerHTML += elementoDestino.parentElement.innerHTML;
-                    }
-                    elementoDestino.parentElement.innerHTML = pecaClicada.parentElement.innerHTML;
-                    pecaClicada.parentElement.innerHTML = "";
-                    // moverPeca(pecaAnalisada, pecaClicada, elementoDestino.parentElement);
-                    console.log("elementoDestino.parentElement: ", elementoDestino.parentElement);
-                    // parei aqui
-                } else {
-                    console.error("Ops! Não é possível realizar este movimento, pois a peça " + elementoDestino.id + " já está ocupando a posição.");
-                }
-            } else if (elementoDestino.tagName == "DIV" || elementoDestino.tagName == "div") {
-                if (elementoDestino.innerHTML == "") {
-                    continuarJogada = true;
-                }
+            switch (pecaAnalisada.tipo) {
+                case "peao":
+                    movimentoPermitido = moverPeao(pecaAnalisada, elementoDestino);
+                    break;
+                case "torre":
+                    movimentoPermitido = moverTorre(pecaAnalisada, elementoDestino);
+                    break;
+                case "cavalo":
+                    movimentoPermitido = moverCavalo(pecaAnalisada, elementoDestino);
+                    break;
+                default:
+                    console.error("Peça selecionada não identificada ou ainda não permitida mover-se!");
+                    break;
             }
 
-            if (continuarJogada == true) {
-                switch (pecaAnalisada.tipo) {
-                    case "peao":
-                        movimentoPermitido = moverPeao(pecaAnalisada, elementoDestino);
-                        break;
-                    case "torre":
-                        movimentoPermitido = moverTorre(pecaAnalisada, elementoDestino);
-                        break;
-                    case "cavalo":
-                        movimentoPermitido = moverCavalo(pecaAnalisada, elementoDestino);
-                        break;
-                    default:
-                        console.error("Peça selecionada não identificada!");
-                        break;
-                }
-
-                /**
-                 * A estrutura de validação abaixo verifica se o movimento está autorizado e executa as linhas de código do bloco if{}
-                 */
-                if (movimentoPermitido == true) {
-                    moverPeca(pecaAnalisada, pecaClicada, elementoDestino);
+            /**
+             * A estrutura de validação abaixo verifica se o movimento está autorizado e executa as linhas de código do bloco if{}
+             */
+            if (movimentoPermitido == true) {
+                moverPeca(pecaAnalisada, pecaClicada, quadranteDestino);
+            } else {
+                if (corPermitida != pecas[elementoDestino.dataset.indexNumber].cor) {
+                    // aqui tem q adicionar as regras de bloquear o movimento se não a peça não puder ser vencida, se não puder "comer" a peça
+                    let permitirMovimento = false;
+                    switch (pecas[elementoDestino.dataset.indexNumber].tipo) {
+                        case "peao":
+                            permitirMovimento = vencerPeao(pecaAnalisada, pecaClicada);
+                            break;
+                    
+                        default:
+                            console.error("Peça não identificada ou ainda não programada para vencer a peça oponente.");
+                            break;
+                    }
+                    if (permitirMovimento == true) {
+                        if (corPermitida == cor1) {
+                            pecasVencidasBrancas.innerHTML += quadranteDestino.innerHTML;
+                        } else {
+                            pecasVencidasPretas.innerHTML += quadranteDestino.innerHTML;
+                        }
+                        moverPeca(pecaAnalisada, pecaClicada, quadranteDestino);
+                    } else {
+                        console.error("Ops! Não é possível vencer a peça: " + quadranteDestino.children.item(0).id);
+                    }
                 } else {
                     console.error("Movimento não permitido.");
+                    console.error("Ops! Não é possível realizar este movimento, pois o quadrante " + quadranteDestino.id + " já está ocupado por: " + quadranteDestino.children.item(0).id);
                 }
-            } else {
-                console.error("Ops! Não é possível realizar este movimento, pois o quadrante " + elementoDestino.id + " já está ocupado por: " + elementoDestino.children.item(0).id);
             }
             pecaClicada = null;
         } catch (e) {
