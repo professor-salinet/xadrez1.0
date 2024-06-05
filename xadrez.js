@@ -421,7 +421,22 @@ function moverPeca(pecaAnalisada, pecaClicada, elementoDestino) {
 
 function vencerPeao(pecaAnalisada, pecaClicada) {
     let permitirMovimento = false;
-    if (pecaAnalisada.coluna != pecaClicada.coluna) {
+    let numVetorLinhaPecaClicada = linhas.indexOf(pecas[pecaClicada.dataset.indexNumber].linha);
+    let numVetorColunaPecaClicada = colunas.indexOf(pecas[pecaClicada.dataset.indexNumber].coluna);
+    let corPecaClicada = colunas.indexOf(pecas[pecaClicada.dataset.indexNumber].cor);
+    let objPecaClicada = pecas[pecaClicada.dataset.indexNumber];
+    let numVetorColunaPecaAnalisada = colunas.indexOf(pecaAnalisada.coluna);
+    let numVetorLinhaPecaAnalisada = linhas.indexOf(pecaAnalisada.linha);
+    // console.log(pecaClicada);
+    // console.log(pecaAnalisada);
+    if (
+        objPecaClicada.cor == cor1 &&
+        (
+            (numVetorColunaPecaClicada - 1) == numVetorColunaPecaAnalisada ||
+            (numVetorColunaPecaClicada + 1) == numVetorColunaPecaAnalisada
+        ) &&
+        (numVetorLinhaPecaClicada - 1) == numVetorLinhaPecaAnalisada
+    ) {
         permitirMovimento = true;
     }
     return permitirMovimento;
@@ -532,7 +547,7 @@ function vencerPeao(pecaAnalisada, pecaClicada) {
                         case "peao":
                             permitirMovimento = vencerPeao(pecaAnalisada, pecaClicada);
                             break;
-                    
+
                         default:
                             console.error("Peça não identificada ou ainda não programada para vencer a peça oponente.");
                             break;
