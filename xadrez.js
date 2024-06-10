@@ -435,7 +435,17 @@ function vencerPeao(pecaAnalisada, pecaClicada) {
         (numVetorLinhaPecaClicada - 1) == numVetorLinhaPecaAnalisada
     ) {
         permitirMovimento = true;
+    } else if (
+        objPecaClicada.cor == cor2 &&
+        (
+            (numVetorColunaPecaClicada - 1) == numVetorColunaPecaAnalisada ||
+            (numVetorColunaPecaClicada + 1) == numVetorColunaPecaAnalisada
+        ) &&
+        (numVetorLinhaPecaClicada + 1) == numVetorLinhaPecaAnalisada
+    ) {
+        permitirMovimento = true;
     }
+
     return permitirMovimento;
 }
 
