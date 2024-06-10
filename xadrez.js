@@ -423,12 +423,9 @@ function vencerPeao(pecaAnalisada, pecaClicada) {
     let permitirMovimento = false;
     let numVetorLinhaPecaClicada = linhas.indexOf(pecas[pecaClicada.dataset.indexNumber].linha);
     let numVetorColunaPecaClicada = colunas.indexOf(pecas[pecaClicada.dataset.indexNumber].coluna);
-    let corPecaClicada = colunas.indexOf(pecas[pecaClicada.dataset.indexNumber].cor);
     let objPecaClicada = pecas[pecaClicada.dataset.indexNumber];
     let numVetorColunaPecaAnalisada = colunas.indexOf(pecaAnalisada.coluna);
     let numVetorLinhaPecaAnalisada = linhas.indexOf(pecaAnalisada.linha);
-    // console.log(pecaClicada);
-    // console.log(pecaAnalisada);
     if (
         objPecaClicada.cor == cor1 &&
         (
@@ -441,6 +438,27 @@ function vencerPeao(pecaAnalisada, pecaClicada) {
     }
     return permitirMovimento;
 }
+
+function vencerCavalo(pecaAnalisada, pecaClicada) {
+    let permitirMovimento = false;
+    let numVetorLinhaPecaClicada = linhas.indexOf(pecas[pecaClicada.dataset.indexNumber].linha);
+    let numVetorColunaPecaClicada = colunas.indexOf(pecas[pecaClicada.dataset.indexNumber].coluna);
+    let corPecaClicada = colunas.indexOf(pecas[pecaClicada.dataset.indexNumber].cor);
+    let objPecaClicada = pecas[pecaClicada.dataset.indexNumber];
+    let numVetorColunaPecaAnalisada = colunas.indexOf(pecaAnalisada.coluna);
+    let numVetorLinhaPecaAnalisada = linhas.indexOf(pecaAnalisada.linha);
+    if (
+        objPecaClicada.cor == cor1 &&
+        (
+            (numVetorColunaPecaClicada - 1) == numVetorColunaPecaAnalisada ||
+            (numVetorColunaPecaClicada + 1) == numVetorColunaPecaAnalisada
+        ) &&
+        (numVetorLinhaPecaClicada - 1) == numVetorLinhaPecaAnalisada
+    ) {
+        permitirMovimento = true;
+    }
+    return permitirMovimento;}
+
 
 (function() { // execução em tempo real das linhas de código do bloco de função inominada
     document.onmousedown = handleMouseDown;
@@ -540,14 +558,18 @@ function vencerPeao(pecaAnalisada, pecaClicada) {
             if (movimentoPermitido == true) {
                 moverPeca(pecaAnalisada, pecaClicada, quadranteDestino);
             } else {
-                if (corPermitida != pecas[elementoDestino.dataset.indexNumber].cor) {
+                let nVetorElementoDestino = elementoDestino.dataset.indexNumber;
+                if (corPermitida != pecas[nVetorElementoDestino].cor) {
                     // aqui tem q adicionar as regras de bloquear o movimento se não a peça não puder ser vencida, se não puder "comer" a peça
                     let permitirMovimento = false;
-                    switch (pecas[elementoDestino.dataset.indexNumber].tipo) {
+                    switch (pecas[nVetorElementoDestino].tipo) {
                         case "peao":
-                            permitirMovimento = vencerPeao(pecaAnalisada, pecaClicada);
+                            permitirMovimento = vencerPeao(pecas[nVetorElementoDestino], pecaClicada);
                             break;
-
+                        case "cavalo":
+                            permitirMovimento = vencerCavalo(pecas[nVetorElementoDestino], pecaClicada);
+                            break;
+    
                         default:
                             console.error("Peça não identificada ou ainda não programada para vencer a peça oponente.");
                             break;
